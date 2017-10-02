@@ -1,0 +1,1992 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    LBRACKET
+    FILE
+    DIV
+    WITH
+    PACKED
+    CASE
+    SET
+    TO
+    RECORD
+    ARRAY
+    REPEAT
+    GOTO
+    FOR
+    IN
+    UNTIL
+    AND
+    NIL
+    OF
+    DOWNTO
+    NOT
+    RBRACKET
+    TYPE
+    OR
+    MOD
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM ID SEMICOLON block POINT
+Rule 2     block -> labelDecl constDecl varDecl BEGIN procDecl functDecl statement END
+Rule 3     labelDecl -> LABEL NUMBER SEMICOLON
+Rule 4     labelDecl -> empty
+Rule 5     constDecl -> empty
+Rule 6     constDecl -> CONST constAssignmentList SEMICOLON
+Rule 7     constAssignmentList -> ID EQ INTEGER
+Rule 8     constAssignmentList -> ID EQ REAL
+Rule 9     constAssignmentList -> ID EQ STRING
+Rule 10    constAssignmentList -> ID EQ NUMBER
+Rule 11    constAssignmentList -> ID EQ BOOLEAN
+Rule 12    typeDefinition -> empty
+Rule 13    typeDefinition -> INTEGER
+Rule 14    typeDefinition -> REAL
+Rule 15    typeDefinition -> STRING
+Rule 16    typeDefinition -> BOOLEAN
+Rule 17    varDecl -> empty
+Rule 18    varDecl -> VAR identList COLON typeDefinition SEMICOLON identList_2
+Rule 19    identList -> ID
+Rule 20    identList -> identList COMMA ID
+Rule 21    identList_2 -> empty
+Rule 22    identList_2 -> identList COLON typeDefinition SEMICOLON identList_2
+Rule 23    procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON
+Rule 24    procDecl -> empty
+Rule 25    functDecl -> empty
+Rule 26    functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+Rule 27    parameterList -> empty
+Rule 28    parameters -> parameterList
+Rule 29    parameterList -> parameterList SEMICOLON parameter
+Rule 30    parameterList -> parameter
+Rule 31    parameter -> ID COLON typeDefinition
+Rule 32    parameter -> ID COMMA parameter
+Rule 33    parameter -> COLON typeDefinition
+Rule 34    statement -> empty
+Rule 35    statement -> statement ID EQUALS expression SEMICOLON
+Rule 36    statement -> BEGIN statementList END
+Rule 37    statement -> statement IF condition THEN statement
+Rule 38    statement -> statement IF condition THEN statement ELSE statement
+Rule 39    statement -> WHILE condition DO statement
+Rule 40    statementList -> statement
+Rule 41    statementList -> statementList SEMICOLON statement
+Rule 42    condition -> expression relation expression
+Rule 43    relation -> EQUALS
+Rule 44    relation -> LT
+Rule 45    relation -> LE
+Rule 46    relation -> GT
+Rule 47    relation -> GE
+Rule 48    relation -> EQ
+Rule 49    relation -> NEQ
+Rule 50    expression -> term
+Rule 51    expression -> addOperator term
+Rule 52    expression -> expression addOperator term
+Rule 53    addOperator -> PLUS
+Rule 54    addOperator -> MINUS
+Rule 55    term -> factor
+Rule 56    term -> term multOperator factor
+Rule 57    multOperator -> TIMES
+Rule 58    multOperator -> DIVIDE
+Rule 59    factor -> ID
+Rule 60    factor -> REAL
+Rule 61    factor -> INTEGER
+Rule 62    factor -> LPAREN expression RPAREN
+Rule 63    factor -> NUMBER
+Rule 64    factor -> BOOLEAN
+Rule 65    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 
+ARRAY                : 
+BEGIN                : 2 36
+BOOLEAN              : 11 16 64
+CASE                 : 
+COLON                : 18 22 26 31 33
+COMMA                : 20 32
+CONST                : 6
+DIV                  : 
+DIVIDE               : 58
+DO                   : 39
+DOWNTO               : 
+ELSE                 : 38
+END                  : 2 36
+EQ                   : 7 8 9 10 11 48
+EQUALS               : 35 43
+FILE                 : 
+FOR                  : 
+FUNCTION             : 26
+GE                   : 47
+GOTO                 : 
+GT                   : 46
+ID                   : 1 7 8 9 10 11 19 20 23 26 31 32 35 59
+IF                   : 37 38
+IN                   : 
+INTEGER              : 7 13 61
+LABEL                : 3
+LBRACKET             : 
+LE                   : 45
+LPAREN               : 23 26 62
+LT                   : 44
+MINUS                : 54
+MOD                  : 
+NEQ                  : 49
+NIL                  : 
+NOT                  : 
+NUMBER               : 3 10 63
+OF                   : 
+OR                   : 
+PACKED               : 
+PLUS                 : 53
+POINT                : 1
+PROCEDURE            : 23
+PROGRAM              : 1
+RBRACKET             : 
+REAL                 : 8 14 60
+RECORD               : 
+REPEAT               : 
+RPAREN               : 23 26 62
+SEMICOLON            : 1 3 6 18 22 23 23 26 26 29 35 41
+SET                  : 
+STRING               : 9 15
+THEN                 : 37 38
+TIMES                : 57
+TO                   : 
+TYPE                 : 
+UNTIL                : 
+VAR                  : 18
+WHILE                : 39
+WITH                 : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+addOperator          : 51 52
+block                : 1 23 26
+condition            : 37 38 39
+constAssignmentList  : 6
+constDecl            : 2
+empty                : 4 5 12 17 21 24 25 27 34
+expression           : 35 42 42 52 62
+factor               : 55 56
+functDecl            : 2
+identList            : 18 20 22
+identList_2          : 18 22
+labelDecl            : 2
+multOperator         : 56
+parameter            : 29 30 32
+parameterList        : 28 29
+parameters           : 23 26
+procDecl             : 2
+program              : 0
+relation             : 42
+statement            : 2 35 37 37 38 38 38 39 40 41
+statementList        : 36 41
+term                 : 50 51 52 56
+typeDefinition       : 18 22 26 31 33
+varDecl              : 2
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID SEMICOLON block POINT
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID SEMICOLON block POINT
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . SEMICOLON block POINT
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (1) program -> PROGRAM ID SEMICOLON . block POINT
+    (2) block -> . labelDecl constDecl varDecl BEGIN procDecl functDecl statement END
+    (3) labelDecl -> . LABEL NUMBER SEMICOLON
+    (4) labelDecl -> . empty
+    (65) empty -> .
+
+    LABEL           shift and go to state 6
+    CONST           reduce using rule 65 (empty -> .)
+    VAR             reduce using rule 65 (empty -> .)
+    BEGIN           reduce using rule 65 (empty -> .)
+
+    labelDecl                      shift and go to state 5
+    empty                          shift and go to state 7
+    block                          shift and go to state 8
+
+state 5
+
+    (2) block -> labelDecl . constDecl varDecl BEGIN procDecl functDecl statement END
+    (5) constDecl -> . empty
+    (6) constDecl -> . CONST constAssignmentList SEMICOLON
+    (65) empty -> .
+
+    CONST           shift and go to state 9
+    VAR             reduce using rule 65 (empty -> .)
+    BEGIN           reduce using rule 65 (empty -> .)
+
+    constDecl                      shift and go to state 10
+    empty                          shift and go to state 11
+
+state 6
+
+    (3) labelDecl -> LABEL . NUMBER SEMICOLON
+
+    NUMBER          shift and go to state 12
+
+
+state 7
+
+    (4) labelDecl -> empty .
+
+    CONST           reduce using rule 4 (labelDecl -> empty .)
+    VAR             reduce using rule 4 (labelDecl -> empty .)
+    BEGIN           reduce using rule 4 (labelDecl -> empty .)
+
+
+state 8
+
+    (1) program -> PROGRAM ID SEMICOLON block . POINT
+
+    POINT           shift and go to state 13
+
+
+state 9
+
+    (6) constDecl -> CONST . constAssignmentList SEMICOLON
+    (7) constAssignmentList -> . ID EQ INTEGER
+    (8) constAssignmentList -> . ID EQ REAL
+    (9) constAssignmentList -> . ID EQ STRING
+    (10) constAssignmentList -> . ID EQ NUMBER
+    (11) constAssignmentList -> . ID EQ BOOLEAN
+
+    ID              shift and go to state 15
+
+    constAssignmentList            shift and go to state 14
+
+state 10
+
+    (2) block -> labelDecl constDecl . varDecl BEGIN procDecl functDecl statement END
+    (17) varDecl -> . empty
+    (18) varDecl -> . VAR identList COLON typeDefinition SEMICOLON identList_2
+    (65) empty -> .
+
+    VAR             shift and go to state 17
+    BEGIN           reduce using rule 65 (empty -> .)
+
+    varDecl                        shift and go to state 16
+    empty                          shift and go to state 18
+
+state 11
+
+    (5) constDecl -> empty .
+
+    VAR             reduce using rule 5 (constDecl -> empty .)
+    BEGIN           reduce using rule 5 (constDecl -> empty .)
+
+
+state 12
+
+    (3) labelDecl -> LABEL NUMBER . SEMICOLON
+
+    SEMICOLON       shift and go to state 19
+
+
+state 13
+
+    (1) program -> PROGRAM ID SEMICOLON block POINT .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID SEMICOLON block POINT .)
+
+
+state 14
+
+    (6) constDecl -> CONST constAssignmentList . SEMICOLON
+
+    SEMICOLON       shift and go to state 20
+
+
+state 15
+
+    (7) constAssignmentList -> ID . EQ INTEGER
+    (8) constAssignmentList -> ID . EQ REAL
+    (9) constAssignmentList -> ID . EQ STRING
+    (10) constAssignmentList -> ID . EQ NUMBER
+    (11) constAssignmentList -> ID . EQ BOOLEAN
+
+    EQ              shift and go to state 21
+
+
+state 16
+
+    (2) block -> labelDecl constDecl varDecl . BEGIN procDecl functDecl statement END
+
+    BEGIN           shift and go to state 22
+
+
+state 17
+
+    (18) varDecl -> VAR . identList COLON typeDefinition SEMICOLON identList_2
+    (19) identList -> . ID
+    (20) identList -> . identList COMMA ID
+
+    ID              shift and go to state 24
+
+    identList                      shift and go to state 23
+
+state 18
+
+    (17) varDecl -> empty .
+
+    BEGIN           reduce using rule 17 (varDecl -> empty .)
+
+
+state 19
+
+    (3) labelDecl -> LABEL NUMBER SEMICOLON .
+
+    CONST           reduce using rule 3 (labelDecl -> LABEL NUMBER SEMICOLON .)
+    VAR             reduce using rule 3 (labelDecl -> LABEL NUMBER SEMICOLON .)
+    BEGIN           reduce using rule 3 (labelDecl -> LABEL NUMBER SEMICOLON .)
+
+
+state 20
+
+    (6) constDecl -> CONST constAssignmentList SEMICOLON .
+
+    VAR             reduce using rule 6 (constDecl -> CONST constAssignmentList SEMICOLON .)
+    BEGIN           reduce using rule 6 (constDecl -> CONST constAssignmentList SEMICOLON .)
+
+
+state 21
+
+    (7) constAssignmentList -> ID EQ . INTEGER
+    (8) constAssignmentList -> ID EQ . REAL
+    (9) constAssignmentList -> ID EQ . STRING
+    (10) constAssignmentList -> ID EQ . NUMBER
+    (11) constAssignmentList -> ID EQ . BOOLEAN
+
+    INTEGER         shift and go to state 29
+    REAL            shift and go to state 25
+    STRING          shift and go to state 26
+    NUMBER          shift and go to state 27
+    BOOLEAN         shift and go to state 28
+
+
+state 22
+
+    (2) block -> labelDecl constDecl varDecl BEGIN . procDecl functDecl statement END
+    (23) procDecl -> . PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON
+    (24) procDecl -> . empty
+    (65) empty -> .
+
+    PROCEDURE       shift and go to state 32
+    FUNCTION        reduce using rule 65 (empty -> .)
+    BEGIN           reduce using rule 65 (empty -> .)
+    WHILE           reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+
+    procDecl                       shift and go to state 30
+    empty                          shift and go to state 31
+
+state 23
+
+    (18) varDecl -> VAR identList . COLON typeDefinition SEMICOLON identList_2
+    (20) identList -> identList . COMMA ID
+
+    COLON           shift and go to state 33
+    COMMA           shift and go to state 34
+
+
+state 24
+
+    (19) identList -> ID .
+
+    COLON           reduce using rule 19 (identList -> ID .)
+    COMMA           reduce using rule 19 (identList -> ID .)
+
+
+state 25
+
+    (8) constAssignmentList -> ID EQ REAL .
+
+    SEMICOLON       reduce using rule 8 (constAssignmentList -> ID EQ REAL .)
+
+
+state 26
+
+    (9) constAssignmentList -> ID EQ STRING .
+
+    SEMICOLON       reduce using rule 9 (constAssignmentList -> ID EQ STRING .)
+
+
+state 27
+
+    (10) constAssignmentList -> ID EQ NUMBER .
+
+    SEMICOLON       reduce using rule 10 (constAssignmentList -> ID EQ NUMBER .)
+
+
+state 28
+
+    (11) constAssignmentList -> ID EQ BOOLEAN .
+
+    SEMICOLON       reduce using rule 11 (constAssignmentList -> ID EQ BOOLEAN .)
+
+
+state 29
+
+    (7) constAssignmentList -> ID EQ INTEGER .
+
+    SEMICOLON       reduce using rule 7 (constAssignmentList -> ID EQ INTEGER .)
+
+
+state 30
+
+    (2) block -> labelDecl constDecl varDecl BEGIN procDecl . functDecl statement END
+    (25) functDecl -> . empty
+    (26) functDecl -> . FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+    (65) empty -> .
+
+    FUNCTION        shift and go to state 35
+    BEGIN           reduce using rule 65 (empty -> .)
+    WHILE           reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+
+    functDecl                      shift and go to state 36
+    empty                          shift and go to state 37
+
+state 31
+
+    (24) procDecl -> empty .
+
+    FUNCTION        reduce using rule 24 (procDecl -> empty .)
+    BEGIN           reduce using rule 24 (procDecl -> empty .)
+    WHILE           reduce using rule 24 (procDecl -> empty .)
+    END             reduce using rule 24 (procDecl -> empty .)
+    ID              reduce using rule 24 (procDecl -> empty .)
+    IF              reduce using rule 24 (procDecl -> empty .)
+
+
+state 32
+
+    (23) procDecl -> PROCEDURE . ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON
+
+    ID              shift and go to state 38
+
+
+state 33
+
+    (18) varDecl -> VAR identList COLON . typeDefinition SEMICOLON identList_2
+    (12) typeDefinition -> . empty
+    (13) typeDefinition -> . INTEGER
+    (14) typeDefinition -> . REAL
+    (15) typeDefinition -> . STRING
+    (16) typeDefinition -> . BOOLEAN
+    (65) empty -> .
+
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 39
+    STRING          shift and go to state 40
+    BOOLEAN         shift and go to state 42
+    SEMICOLON       reduce using rule 65 (empty -> .)
+
+    typeDefinition                 shift and go to state 41
+    empty                          shift and go to state 44
+
+state 34
+
+    (20) identList -> identList COMMA . ID
+
+    ID              shift and go to state 45
+
+
+state 35
+
+    (26) functDecl -> FUNCTION . ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+
+    ID              shift and go to state 46
+
+
+state 36
+
+    (2) block -> labelDecl constDecl varDecl BEGIN procDecl functDecl . statement END
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    END             reduce using rule 65 (empty -> .)
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+
+    statement                      shift and go to state 49
+    empty                          shift and go to state 50
+
+state 37
+
+    (25) functDecl -> empty .
+
+    BEGIN           reduce using rule 25 (functDecl -> empty .)
+    WHILE           reduce using rule 25 (functDecl -> empty .)
+    END             reduce using rule 25 (functDecl -> empty .)
+    ID              reduce using rule 25 (functDecl -> empty .)
+    IF              reduce using rule 25 (functDecl -> empty .)
+
+
+state 38
+
+    (23) procDecl -> PROCEDURE ID . LPAREN parameters RPAREN SEMICOLON block SEMICOLON
+
+    LPAREN          shift and go to state 51
+
+
+state 39
+
+    (14) typeDefinition -> REAL .
+
+    SEMICOLON       reduce using rule 14 (typeDefinition -> REAL .)
+    RPAREN          reduce using rule 14 (typeDefinition -> REAL .)
+
+
+state 40
+
+    (15) typeDefinition -> STRING .
+
+    SEMICOLON       reduce using rule 15 (typeDefinition -> STRING .)
+    RPAREN          reduce using rule 15 (typeDefinition -> STRING .)
+
+
+state 41
+
+    (18) varDecl -> VAR identList COLON typeDefinition . SEMICOLON identList_2
+
+    SEMICOLON       shift and go to state 52
+
+
+state 42
+
+    (16) typeDefinition -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 16 (typeDefinition -> BOOLEAN .)
+    RPAREN          reduce using rule 16 (typeDefinition -> BOOLEAN .)
+
+
+state 43
+
+    (13) typeDefinition -> INTEGER .
+
+    SEMICOLON       reduce using rule 13 (typeDefinition -> INTEGER .)
+    RPAREN          reduce using rule 13 (typeDefinition -> INTEGER .)
+
+
+state 44
+
+    (12) typeDefinition -> empty .
+
+    SEMICOLON       reduce using rule 12 (typeDefinition -> empty .)
+    RPAREN          reduce using rule 12 (typeDefinition -> empty .)
+
+
+state 45
+
+    (20) identList -> identList COMMA ID .
+
+    COLON           reduce using rule 20 (identList -> identList COMMA ID .)
+    COMMA           reduce using rule 20 (identList -> identList COMMA ID .)
+
+
+state 46
+
+    (26) functDecl -> FUNCTION ID . LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+
+    LPAREN          shift and go to state 53
+
+
+state 47
+
+    (36) statement -> BEGIN . statementList END
+    (40) statementList -> . statement
+    (41) statementList -> . statementList SEMICOLON statement
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    SEMICOLON       reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 50
+    statement                      shift and go to state 55
+    statementList                  shift and go to state 54
+
+state 48
+
+    (39) statement -> WHILE . condition DO statement
+    (42) condition -> . expression relation expression
+    (50) expression -> . term
+    (51) expression -> . addOperator term
+    (52) expression -> . expression addOperator term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 63
+    addOperator                    shift and go to state 65
+    expression                     shift and go to state 66
+    condition                      shift and go to state 68
+
+state 49
+
+    (2) block -> labelDecl constDecl varDecl BEGIN procDecl functDecl statement . END
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+    END             shift and go to state 69
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+
+state 50
+
+    (34) statement -> empty .
+
+    ID              reduce using rule 34 (statement -> empty .)
+    IF              reduce using rule 34 (statement -> empty .)
+    END             reduce using rule 34 (statement -> empty .)
+    SEMICOLON       reduce using rule 34 (statement -> empty .)
+    ELSE            reduce using rule 34 (statement -> empty .)
+
+
+state 51
+
+    (23) procDecl -> PROCEDURE ID LPAREN . parameters RPAREN SEMICOLON block SEMICOLON
+    (28) parameters -> . parameterList
+    (27) parameterList -> . empty
+    (29) parameterList -> . parameterList SEMICOLON parameter
+    (30) parameterList -> . parameter
+    (65) empty -> .
+    (31) parameter -> . ID COLON typeDefinition
+    (32) parameter -> . ID COMMA parameter
+    (33) parameter -> . COLON typeDefinition
+
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    RPAREN          reduce using rule 65 (empty -> .)
+    ID              shift and go to state 77
+    COLON           shift and go to state 75
+
+    parameters                     shift and go to state 72
+    parameterList                  shift and go to state 73
+    parameter                      shift and go to state 76
+    empty                          shift and go to state 74
+
+state 52
+
+    (18) varDecl -> VAR identList COLON typeDefinition SEMICOLON . identList_2
+    (21) identList_2 -> . empty
+    (22) identList_2 -> . identList COLON typeDefinition SEMICOLON identList_2
+    (65) empty -> .
+    (19) identList -> . ID
+    (20) identList -> . identList COMMA ID
+
+    BEGIN           reduce using rule 65 (empty -> .)
+    ID              shift and go to state 24
+
+    identList_2                    shift and go to state 79
+    identList                      shift and go to state 78
+    empty                          shift and go to state 80
+
+state 53
+
+    (26) functDecl -> FUNCTION ID LPAREN . parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+    (28) parameters -> . parameterList
+    (27) parameterList -> . empty
+    (29) parameterList -> . parameterList SEMICOLON parameter
+    (30) parameterList -> . parameter
+    (65) empty -> .
+    (31) parameter -> . ID COLON typeDefinition
+    (32) parameter -> . ID COMMA parameter
+    (33) parameter -> . COLON typeDefinition
+
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    RPAREN          reduce using rule 65 (empty -> .)
+    ID              shift and go to state 77
+    COLON           shift and go to state 75
+
+    parameters                     shift and go to state 81
+    parameterList                  shift and go to state 73
+    empty                          shift and go to state 74
+    parameter                      shift and go to state 76
+
+state 54
+
+    (36) statement -> BEGIN statementList . END
+    (41) statementList -> statementList . SEMICOLON statement
+
+    END             shift and go to state 82
+    SEMICOLON       shift and go to state 83
+
+
+state 55
+
+    (40) statementList -> statement .
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+    END             reduce using rule 40 (statementList -> statement .)
+    SEMICOLON       reduce using rule 40 (statementList -> statement .)
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+
+state 56
+
+    (60) factor -> REAL .
+
+    TIMES           reduce using rule 60 (factor -> REAL .)
+    DIVIDE          reduce using rule 60 (factor -> REAL .)
+    PLUS            reduce using rule 60 (factor -> REAL .)
+    MINUS           reduce using rule 60 (factor -> REAL .)
+    DO              reduce using rule 60 (factor -> REAL .)
+    THEN            reduce using rule 60 (factor -> REAL .)
+    EQUALS          reduce using rule 60 (factor -> REAL .)
+    LT              reduce using rule 60 (factor -> REAL .)
+    LE              reduce using rule 60 (factor -> REAL .)
+    GT              reduce using rule 60 (factor -> REAL .)
+    GE              reduce using rule 60 (factor -> REAL .)
+    EQ              reduce using rule 60 (factor -> REAL .)
+    NEQ             reduce using rule 60 (factor -> REAL .)
+    RPAREN          reduce using rule 60 (factor -> REAL .)
+    SEMICOLON       reduce using rule 60 (factor -> REAL .)
+
+
+state 57
+
+    (50) expression -> term .
+    (56) term -> term . multOperator factor
+    (57) multOperator -> . TIMES
+    (58) multOperator -> . DIVIDE
+
+    RPAREN          reduce using rule 50 (expression -> term .)
+    PLUS            reduce using rule 50 (expression -> term .)
+    MINUS           reduce using rule 50 (expression -> term .)
+    EQUALS          reduce using rule 50 (expression -> term .)
+    LT              reduce using rule 50 (expression -> term .)
+    LE              reduce using rule 50 (expression -> term .)
+    GT              reduce using rule 50 (expression -> term .)
+    GE              reduce using rule 50 (expression -> term .)
+    EQ              reduce using rule 50 (expression -> term .)
+    NEQ             reduce using rule 50 (expression -> term .)
+    DO              reduce using rule 50 (expression -> term .)
+    THEN            reduce using rule 50 (expression -> term .)
+    SEMICOLON       reduce using rule 50 (expression -> term .)
+    TIMES           shift and go to state 84
+    DIVIDE          shift and go to state 85
+
+    multOperator                   shift and go to state 86
+
+state 58
+
+    (62) factor -> LPAREN . expression RPAREN
+    (50) expression -> . term
+    (51) expression -> . addOperator term
+    (52) expression -> . expression addOperator term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 57
+    expression                     shift and go to state 87
+    addOperator                    shift and go to state 65
+    factor                         shift and go to state 63
+
+state 59
+
+    (61) factor -> INTEGER .
+
+    TIMES           reduce using rule 61 (factor -> INTEGER .)
+    DIVIDE          reduce using rule 61 (factor -> INTEGER .)
+    PLUS            reduce using rule 61 (factor -> INTEGER .)
+    MINUS           reduce using rule 61 (factor -> INTEGER .)
+    DO              reduce using rule 61 (factor -> INTEGER .)
+    THEN            reduce using rule 61 (factor -> INTEGER .)
+    EQUALS          reduce using rule 61 (factor -> INTEGER .)
+    LT              reduce using rule 61 (factor -> INTEGER .)
+    LE              reduce using rule 61 (factor -> INTEGER .)
+    GT              reduce using rule 61 (factor -> INTEGER .)
+    GE              reduce using rule 61 (factor -> INTEGER .)
+    EQ              reduce using rule 61 (factor -> INTEGER .)
+    NEQ             reduce using rule 61 (factor -> INTEGER .)
+    RPAREN          reduce using rule 61 (factor -> INTEGER .)
+    SEMICOLON       reduce using rule 61 (factor -> INTEGER .)
+
+
+state 60
+
+    (63) factor -> NUMBER .
+
+    TIMES           reduce using rule 63 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 63 (factor -> NUMBER .)
+    PLUS            reduce using rule 63 (factor -> NUMBER .)
+    MINUS           reduce using rule 63 (factor -> NUMBER .)
+    DO              reduce using rule 63 (factor -> NUMBER .)
+    THEN            reduce using rule 63 (factor -> NUMBER .)
+    EQUALS          reduce using rule 63 (factor -> NUMBER .)
+    LT              reduce using rule 63 (factor -> NUMBER .)
+    LE              reduce using rule 63 (factor -> NUMBER .)
+    GT              reduce using rule 63 (factor -> NUMBER .)
+    GE              reduce using rule 63 (factor -> NUMBER .)
+    EQ              reduce using rule 63 (factor -> NUMBER .)
+    NEQ             reduce using rule 63 (factor -> NUMBER .)
+    RPAREN          reduce using rule 63 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 63 (factor -> NUMBER .)
+
+
+state 61
+
+    (59) factor -> ID .
+
+    TIMES           reduce using rule 59 (factor -> ID .)
+    DIVIDE          reduce using rule 59 (factor -> ID .)
+    PLUS            reduce using rule 59 (factor -> ID .)
+    MINUS           reduce using rule 59 (factor -> ID .)
+    DO              reduce using rule 59 (factor -> ID .)
+    THEN            reduce using rule 59 (factor -> ID .)
+    EQUALS          reduce using rule 59 (factor -> ID .)
+    LT              reduce using rule 59 (factor -> ID .)
+    LE              reduce using rule 59 (factor -> ID .)
+    GT              reduce using rule 59 (factor -> ID .)
+    GE              reduce using rule 59 (factor -> ID .)
+    EQ              reduce using rule 59 (factor -> ID .)
+    NEQ             reduce using rule 59 (factor -> ID .)
+    RPAREN          reduce using rule 59 (factor -> ID .)
+    SEMICOLON       reduce using rule 59 (factor -> ID .)
+
+
+state 62
+
+    (64) factor -> BOOLEAN .
+
+    TIMES           reduce using rule 64 (factor -> BOOLEAN .)
+    DIVIDE          reduce using rule 64 (factor -> BOOLEAN .)
+    PLUS            reduce using rule 64 (factor -> BOOLEAN .)
+    MINUS           reduce using rule 64 (factor -> BOOLEAN .)
+    DO              reduce using rule 64 (factor -> BOOLEAN .)
+    THEN            reduce using rule 64 (factor -> BOOLEAN .)
+    EQUALS          reduce using rule 64 (factor -> BOOLEAN .)
+    LT              reduce using rule 64 (factor -> BOOLEAN .)
+    LE              reduce using rule 64 (factor -> BOOLEAN .)
+    GT              reduce using rule 64 (factor -> BOOLEAN .)
+    GE              reduce using rule 64 (factor -> BOOLEAN .)
+    EQ              reduce using rule 64 (factor -> BOOLEAN .)
+    NEQ             reduce using rule 64 (factor -> BOOLEAN .)
+    RPAREN          reduce using rule 64 (factor -> BOOLEAN .)
+    SEMICOLON       reduce using rule 64 (factor -> BOOLEAN .)
+
+
+state 63
+
+    (55) term -> factor .
+
+    TIMES           reduce using rule 55 (term -> factor .)
+    DIVIDE          reduce using rule 55 (term -> factor .)
+    PLUS            reduce using rule 55 (term -> factor .)
+    MINUS           reduce using rule 55 (term -> factor .)
+    DO              reduce using rule 55 (term -> factor .)
+    THEN            reduce using rule 55 (term -> factor .)
+    RPAREN          reduce using rule 55 (term -> factor .)
+    SEMICOLON       reduce using rule 55 (term -> factor .)
+    EQUALS          reduce using rule 55 (term -> factor .)
+    LT              reduce using rule 55 (term -> factor .)
+    LE              reduce using rule 55 (term -> factor .)
+    GT              reduce using rule 55 (term -> factor .)
+    GE              reduce using rule 55 (term -> factor .)
+    EQ              reduce using rule 55 (term -> factor .)
+    NEQ             reduce using rule 55 (term -> factor .)
+
+
+state 64
+
+    (53) addOperator -> PLUS .
+
+    ID              reduce using rule 53 (addOperator -> PLUS .)
+    REAL            reduce using rule 53 (addOperator -> PLUS .)
+    INTEGER         reduce using rule 53 (addOperator -> PLUS .)
+    LPAREN          reduce using rule 53 (addOperator -> PLUS .)
+    NUMBER          reduce using rule 53 (addOperator -> PLUS .)
+    BOOLEAN         reduce using rule 53 (addOperator -> PLUS .)
+
+
+state 65
+
+    (51) expression -> addOperator . term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 88
+    factor                         shift and go to state 63
+
+state 66
+
+    (42) condition -> expression . relation expression
+    (52) expression -> expression . addOperator term
+    (43) relation -> . EQUALS
+    (44) relation -> . LT
+    (45) relation -> . LE
+    (46) relation -> . GT
+    (47) relation -> . GE
+    (48) relation -> . EQ
+    (49) relation -> . NEQ
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+
+    EQUALS          shift and go to state 92
+    LT              shift and go to state 93
+    LE              shift and go to state 89
+    GT              shift and go to state 94
+    GE              shift and go to state 90
+    EQ              shift and go to state 91
+    NEQ             shift and go to state 97
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+
+    relation                       shift and go to state 95
+    addOperator                    shift and go to state 96
+
+state 67
+
+    (54) addOperator -> MINUS .
+
+    ID              reduce using rule 54 (addOperator -> MINUS .)
+    REAL            reduce using rule 54 (addOperator -> MINUS .)
+    INTEGER         reduce using rule 54 (addOperator -> MINUS .)
+    LPAREN          reduce using rule 54 (addOperator -> MINUS .)
+    NUMBER          reduce using rule 54 (addOperator -> MINUS .)
+    BOOLEAN         reduce using rule 54 (addOperator -> MINUS .)
+
+
+state 68
+
+    (39) statement -> WHILE condition . DO statement
+
+    DO              shift and go to state 98
+
+
+state 69
+
+    (2) block -> labelDecl constDecl varDecl BEGIN procDecl functDecl statement END .
+
+    SEMICOLON       reduce using rule 2 (block -> labelDecl constDecl varDecl BEGIN procDecl functDecl statement END .)
+    POINT           reduce using rule 2 (block -> labelDecl constDecl varDecl BEGIN procDecl functDecl statement END .)
+
+
+state 70
+
+    (35) statement -> statement ID . EQUALS expression SEMICOLON
+
+    EQUALS          shift and go to state 99
+
+
+state 71
+
+    (37) statement -> statement IF . condition THEN statement
+    (38) statement -> statement IF . condition THEN statement ELSE statement
+    (42) condition -> . expression relation expression
+    (50) expression -> . term
+    (51) expression -> . addOperator term
+    (52) expression -> . expression addOperator term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 63
+    addOperator                    shift and go to state 65
+    expression                     shift and go to state 66
+    condition                      shift and go to state 100
+
+state 72
+
+    (23) procDecl -> PROCEDURE ID LPAREN parameters . RPAREN SEMICOLON block SEMICOLON
+
+    RPAREN          shift and go to state 101
+
+
+state 73
+
+    (28) parameters -> parameterList .
+    (29) parameterList -> parameterList . SEMICOLON parameter
+
+    RPAREN          reduce using rule 28 (parameters -> parameterList .)
+    SEMICOLON       shift and go to state 102
+
+
+state 74
+
+    (27) parameterList -> empty .
+
+    SEMICOLON       reduce using rule 27 (parameterList -> empty .)
+    RPAREN          reduce using rule 27 (parameterList -> empty .)
+
+
+state 75
+
+    (33) parameter -> COLON . typeDefinition
+    (12) typeDefinition -> . empty
+    (13) typeDefinition -> . INTEGER
+    (14) typeDefinition -> . REAL
+    (15) typeDefinition -> . STRING
+    (16) typeDefinition -> . BOOLEAN
+    (65) empty -> .
+
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 39
+    STRING          shift and go to state 40
+    BOOLEAN         shift and go to state 42
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    RPAREN          reduce using rule 65 (empty -> .)
+
+    typeDefinition                 shift and go to state 103
+    empty                          shift and go to state 44
+
+state 76
+
+    (30) parameterList -> parameter .
+
+    SEMICOLON       reduce using rule 30 (parameterList -> parameter .)
+    RPAREN          reduce using rule 30 (parameterList -> parameter .)
+
+
+state 77
+
+    (31) parameter -> ID . COLON typeDefinition
+    (32) parameter -> ID . COMMA parameter
+
+    COLON           shift and go to state 105
+    COMMA           shift and go to state 104
+
+
+state 78
+
+    (22) identList_2 -> identList . COLON typeDefinition SEMICOLON identList_2
+    (20) identList -> identList . COMMA ID
+
+    COLON           shift and go to state 106
+    COMMA           shift and go to state 34
+
+
+state 79
+
+    (18) varDecl -> VAR identList COLON typeDefinition SEMICOLON identList_2 .
+
+    BEGIN           reduce using rule 18 (varDecl -> VAR identList COLON typeDefinition SEMICOLON identList_2 .)
+
+
+state 80
+
+    (21) identList_2 -> empty .
+
+    BEGIN           reduce using rule 21 (identList_2 -> empty .)
+
+
+state 81
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters . RPAREN COLON typeDefinition SEMICOLON block SEMICOLON
+
+    RPAREN          shift and go to state 107
+
+
+state 82
+
+    (36) statement -> BEGIN statementList END .
+
+    ID              reduce using rule 36 (statement -> BEGIN statementList END .)
+    IF              reduce using rule 36 (statement -> BEGIN statementList END .)
+    END             reduce using rule 36 (statement -> BEGIN statementList END .)
+    SEMICOLON       reduce using rule 36 (statement -> BEGIN statementList END .)
+    ELSE            reduce using rule 36 (statement -> BEGIN statementList END .)
+
+
+state 83
+
+    (41) statementList -> statementList SEMICOLON . statement
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    SEMICOLON       reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 50
+    statement                      shift and go to state 108
+
+state 84
+
+    (57) multOperator -> TIMES .
+
+    ID              reduce using rule 57 (multOperator -> TIMES .)
+    REAL            reduce using rule 57 (multOperator -> TIMES .)
+    INTEGER         reduce using rule 57 (multOperator -> TIMES .)
+    LPAREN          reduce using rule 57 (multOperator -> TIMES .)
+    NUMBER          reduce using rule 57 (multOperator -> TIMES .)
+    BOOLEAN         reduce using rule 57 (multOperator -> TIMES .)
+
+
+state 85
+
+    (58) multOperator -> DIVIDE .
+
+    ID              reduce using rule 58 (multOperator -> DIVIDE .)
+    REAL            reduce using rule 58 (multOperator -> DIVIDE .)
+    INTEGER         reduce using rule 58 (multOperator -> DIVIDE .)
+    LPAREN          reduce using rule 58 (multOperator -> DIVIDE .)
+    NUMBER          reduce using rule 58 (multOperator -> DIVIDE .)
+    BOOLEAN         reduce using rule 58 (multOperator -> DIVIDE .)
+
+
+state 86
+
+    (56) term -> term multOperator . factor
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    factor                         shift and go to state 109
+
+state 87
+
+    (62) factor -> LPAREN expression . RPAREN
+    (52) expression -> expression . addOperator term
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+
+    RPAREN          shift and go to state 110
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+
+    addOperator                    shift and go to state 96
+
+state 88
+
+    (51) expression -> addOperator term .
+    (56) term -> term . multOperator factor
+    (57) multOperator -> . TIMES
+    (58) multOperator -> . DIVIDE
+
+    RPAREN          reduce using rule 51 (expression -> addOperator term .)
+    PLUS            reduce using rule 51 (expression -> addOperator term .)
+    MINUS           reduce using rule 51 (expression -> addOperator term .)
+    EQUALS          reduce using rule 51 (expression -> addOperator term .)
+    LT              reduce using rule 51 (expression -> addOperator term .)
+    LE              reduce using rule 51 (expression -> addOperator term .)
+    GT              reduce using rule 51 (expression -> addOperator term .)
+    GE              reduce using rule 51 (expression -> addOperator term .)
+    EQ              reduce using rule 51 (expression -> addOperator term .)
+    NEQ             reduce using rule 51 (expression -> addOperator term .)
+    DO              reduce using rule 51 (expression -> addOperator term .)
+    THEN            reduce using rule 51 (expression -> addOperator term .)
+    SEMICOLON       reduce using rule 51 (expression -> addOperator term .)
+    TIMES           shift and go to state 84
+    DIVIDE          shift and go to state 85
+
+    multOperator                   shift and go to state 86
+
+state 89
+
+    (45) relation -> LE .
+
+    PLUS            reduce using rule 45 (relation -> LE .)
+    MINUS           reduce using rule 45 (relation -> LE .)
+    ID              reduce using rule 45 (relation -> LE .)
+    REAL            reduce using rule 45 (relation -> LE .)
+    INTEGER         reduce using rule 45 (relation -> LE .)
+    LPAREN          reduce using rule 45 (relation -> LE .)
+    NUMBER          reduce using rule 45 (relation -> LE .)
+    BOOLEAN         reduce using rule 45 (relation -> LE .)
+
+
+state 90
+
+    (47) relation -> GE .
+
+    PLUS            reduce using rule 47 (relation -> GE .)
+    MINUS           reduce using rule 47 (relation -> GE .)
+    ID              reduce using rule 47 (relation -> GE .)
+    REAL            reduce using rule 47 (relation -> GE .)
+    INTEGER         reduce using rule 47 (relation -> GE .)
+    LPAREN          reduce using rule 47 (relation -> GE .)
+    NUMBER          reduce using rule 47 (relation -> GE .)
+    BOOLEAN         reduce using rule 47 (relation -> GE .)
+
+
+state 91
+
+    (48) relation -> EQ .
+
+    PLUS            reduce using rule 48 (relation -> EQ .)
+    MINUS           reduce using rule 48 (relation -> EQ .)
+    ID              reduce using rule 48 (relation -> EQ .)
+    REAL            reduce using rule 48 (relation -> EQ .)
+    INTEGER         reduce using rule 48 (relation -> EQ .)
+    LPAREN          reduce using rule 48 (relation -> EQ .)
+    NUMBER          reduce using rule 48 (relation -> EQ .)
+    BOOLEAN         reduce using rule 48 (relation -> EQ .)
+
+
+state 92
+
+    (43) relation -> EQUALS .
+
+    PLUS            reduce using rule 43 (relation -> EQUALS .)
+    MINUS           reduce using rule 43 (relation -> EQUALS .)
+    ID              reduce using rule 43 (relation -> EQUALS .)
+    REAL            reduce using rule 43 (relation -> EQUALS .)
+    INTEGER         reduce using rule 43 (relation -> EQUALS .)
+    LPAREN          reduce using rule 43 (relation -> EQUALS .)
+    NUMBER          reduce using rule 43 (relation -> EQUALS .)
+    BOOLEAN         reduce using rule 43 (relation -> EQUALS .)
+
+
+state 93
+
+    (44) relation -> LT .
+
+    PLUS            reduce using rule 44 (relation -> LT .)
+    MINUS           reduce using rule 44 (relation -> LT .)
+    ID              reduce using rule 44 (relation -> LT .)
+    REAL            reduce using rule 44 (relation -> LT .)
+    INTEGER         reduce using rule 44 (relation -> LT .)
+    LPAREN          reduce using rule 44 (relation -> LT .)
+    NUMBER          reduce using rule 44 (relation -> LT .)
+    BOOLEAN         reduce using rule 44 (relation -> LT .)
+
+
+state 94
+
+    (46) relation -> GT .
+
+    PLUS            reduce using rule 46 (relation -> GT .)
+    MINUS           reduce using rule 46 (relation -> GT .)
+    ID              reduce using rule 46 (relation -> GT .)
+    REAL            reduce using rule 46 (relation -> GT .)
+    INTEGER         reduce using rule 46 (relation -> GT .)
+    LPAREN          reduce using rule 46 (relation -> GT .)
+    NUMBER          reduce using rule 46 (relation -> GT .)
+    BOOLEAN         reduce using rule 46 (relation -> GT .)
+
+
+state 95
+
+    (42) condition -> expression relation . expression
+    (50) expression -> . term
+    (51) expression -> . addOperator term
+    (52) expression -> . expression addOperator term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 63
+    addOperator                    shift and go to state 65
+    expression                     shift and go to state 111
+
+state 96
+
+    (52) expression -> expression addOperator . term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 112
+    factor                         shift and go to state 63
+
+state 97
+
+    (49) relation -> NEQ .
+
+    PLUS            reduce using rule 49 (relation -> NEQ .)
+    MINUS           reduce using rule 49 (relation -> NEQ .)
+    ID              reduce using rule 49 (relation -> NEQ .)
+    REAL            reduce using rule 49 (relation -> NEQ .)
+    INTEGER         reduce using rule 49 (relation -> NEQ .)
+    LPAREN          reduce using rule 49 (relation -> NEQ .)
+    NUMBER          reduce using rule 49 (relation -> NEQ .)
+    BOOLEAN         reduce using rule 49 (relation -> NEQ .)
+
+
+state 98
+
+    (39) statement -> WHILE condition DO . statement
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    ELSE            reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 50
+    statement                      shift and go to state 113
+
+state 99
+
+    (35) statement -> statement ID EQUALS . expression SEMICOLON
+    (50) expression -> . term
+    (51) expression -> . addOperator term
+    (52) expression -> . expression addOperator term
+    (55) term -> . factor
+    (56) term -> . term multOperator factor
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+    (59) factor -> . ID
+    (60) factor -> . REAL
+    (61) factor -> . INTEGER
+    (62) factor -> . LPAREN expression RPAREN
+    (63) factor -> . NUMBER
+    (64) factor -> . BOOLEAN
+
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+    ID              shift and go to state 61
+    REAL            shift and go to state 56
+    INTEGER         shift and go to state 59
+    LPAREN          shift and go to state 58
+    NUMBER          shift and go to state 60
+    BOOLEAN         shift and go to state 62
+
+    term                           shift and go to state 57
+    factor                         shift and go to state 63
+    addOperator                    shift and go to state 65
+    expression                     shift and go to state 114
+
+state 100
+
+    (37) statement -> statement IF condition . THEN statement
+    (38) statement -> statement IF condition . THEN statement ELSE statement
+
+    THEN            shift and go to state 115
+
+
+state 101
+
+    (23) procDecl -> PROCEDURE ID LPAREN parameters RPAREN . SEMICOLON block SEMICOLON
+
+    SEMICOLON       shift and go to state 116
+
+
+state 102
+
+    (29) parameterList -> parameterList SEMICOLON . parameter
+    (31) parameter -> . ID COLON typeDefinition
+    (32) parameter -> . ID COMMA parameter
+    (33) parameter -> . COLON typeDefinition
+
+    ID              shift and go to state 77
+    COLON           shift and go to state 75
+
+    parameter                      shift and go to state 117
+
+state 103
+
+    (33) parameter -> COLON typeDefinition .
+
+    SEMICOLON       reduce using rule 33 (parameter -> COLON typeDefinition .)
+    RPAREN          reduce using rule 33 (parameter -> COLON typeDefinition .)
+
+
+state 104
+
+    (32) parameter -> ID COMMA . parameter
+    (31) parameter -> . ID COLON typeDefinition
+    (32) parameter -> . ID COMMA parameter
+    (33) parameter -> . COLON typeDefinition
+
+    ID              shift and go to state 77
+    COLON           shift and go to state 75
+
+    parameter                      shift and go to state 118
+
+state 105
+
+    (31) parameter -> ID COLON . typeDefinition
+    (12) typeDefinition -> . empty
+    (13) typeDefinition -> . INTEGER
+    (14) typeDefinition -> . REAL
+    (15) typeDefinition -> . STRING
+    (16) typeDefinition -> . BOOLEAN
+    (65) empty -> .
+
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 39
+    STRING          shift and go to state 40
+    BOOLEAN         shift and go to state 42
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    RPAREN          reduce using rule 65 (empty -> .)
+
+    typeDefinition                 shift and go to state 119
+    empty                          shift and go to state 44
+
+state 106
+
+    (22) identList_2 -> identList COLON . typeDefinition SEMICOLON identList_2
+    (12) typeDefinition -> . empty
+    (13) typeDefinition -> . INTEGER
+    (14) typeDefinition -> . REAL
+    (15) typeDefinition -> . STRING
+    (16) typeDefinition -> . BOOLEAN
+    (65) empty -> .
+
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 39
+    STRING          shift and go to state 40
+    BOOLEAN         shift and go to state 42
+    SEMICOLON       reduce using rule 65 (empty -> .)
+
+    typeDefinition                 shift and go to state 120
+    empty                          shift and go to state 44
+
+state 107
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN . COLON typeDefinition SEMICOLON block SEMICOLON
+
+    COLON           shift and go to state 121
+
+
+state 108
+
+    (41) statementList -> statementList SEMICOLON statement .
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+    END             reduce using rule 41 (statementList -> statementList SEMICOLON statement .)
+    SEMICOLON       reduce using rule 41 (statementList -> statementList SEMICOLON statement .)
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+
+state 109
+
+    (56) term -> term multOperator factor .
+
+    TIMES           reduce using rule 56 (term -> term multOperator factor .)
+    DIVIDE          reduce using rule 56 (term -> term multOperator factor .)
+    PLUS            reduce using rule 56 (term -> term multOperator factor .)
+    MINUS           reduce using rule 56 (term -> term multOperator factor .)
+    DO              reduce using rule 56 (term -> term multOperator factor .)
+    THEN            reduce using rule 56 (term -> term multOperator factor .)
+    RPAREN          reduce using rule 56 (term -> term multOperator factor .)
+    SEMICOLON       reduce using rule 56 (term -> term multOperator factor .)
+    EQUALS          reduce using rule 56 (term -> term multOperator factor .)
+    LT              reduce using rule 56 (term -> term multOperator factor .)
+    LE              reduce using rule 56 (term -> term multOperator factor .)
+    GT              reduce using rule 56 (term -> term multOperator factor .)
+    GE              reduce using rule 56 (term -> term multOperator factor .)
+    EQ              reduce using rule 56 (term -> term multOperator factor .)
+    NEQ             reduce using rule 56 (term -> term multOperator factor .)
+
+
+state 110
+
+    (62) factor -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    DO              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    EQUALS          reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    LT              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    LE              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    GT              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    GE              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    NEQ             reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+    SEMICOLON       reduce using rule 62 (factor -> LPAREN expression RPAREN .)
+
+
+state 111
+
+    (42) condition -> expression relation expression .
+    (52) expression -> expression . addOperator term
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+
+    THEN            reduce using rule 42 (condition -> expression relation expression .)
+    DO              reduce using rule 42 (condition -> expression relation expression .)
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+
+    addOperator                    shift and go to state 96
+
+state 112
+
+    (52) expression -> expression addOperator term .
+    (56) term -> term . multOperator factor
+    (57) multOperator -> . TIMES
+    (58) multOperator -> . DIVIDE
+
+    RPAREN          reduce using rule 52 (expression -> expression addOperator term .)
+    PLUS            reduce using rule 52 (expression -> expression addOperator term .)
+    MINUS           reduce using rule 52 (expression -> expression addOperator term .)
+    EQUALS          reduce using rule 52 (expression -> expression addOperator term .)
+    LT              reduce using rule 52 (expression -> expression addOperator term .)
+    LE              reduce using rule 52 (expression -> expression addOperator term .)
+    GT              reduce using rule 52 (expression -> expression addOperator term .)
+    GE              reduce using rule 52 (expression -> expression addOperator term .)
+    EQ              reduce using rule 52 (expression -> expression addOperator term .)
+    NEQ             reduce using rule 52 (expression -> expression addOperator term .)
+    DO              reduce using rule 52 (expression -> expression addOperator term .)
+    THEN            reduce using rule 52 (expression -> expression addOperator term .)
+    SEMICOLON       reduce using rule 52 (expression -> expression addOperator term .)
+    TIMES           shift and go to state 84
+    DIVIDE          shift and go to state 85
+
+    multOperator                   shift and go to state 86
+
+state 113
+
+    (39) statement -> WHILE condition DO statement .
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    END             reduce using rule 39 (statement -> WHILE condition DO statement .)
+    SEMICOLON       reduce using rule 39 (statement -> WHILE condition DO statement .)
+    ELSE            reduce using rule 39 (statement -> WHILE condition DO statement .)
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+  ! ID              [ reduce using rule 39 (statement -> WHILE condition DO statement .) ]
+  ! IF              [ reduce using rule 39 (statement -> WHILE condition DO statement .) ]
+
+
+state 114
+
+    (35) statement -> statement ID EQUALS expression . SEMICOLON
+    (52) expression -> expression . addOperator term
+    (53) addOperator -> . PLUS
+    (54) addOperator -> . MINUS
+
+    SEMICOLON       shift and go to state 122
+    PLUS            shift and go to state 64
+    MINUS           shift and go to state 67
+
+    addOperator                    shift and go to state 96
+
+state 115
+
+    (37) statement -> statement IF condition THEN . statement
+    (38) statement -> statement IF condition THEN . statement ELSE statement
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    ELSE            reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 50
+    statement                      shift and go to state 123
+
+state 116
+
+    (23) procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON . block SEMICOLON
+    (2) block -> . labelDecl constDecl varDecl BEGIN procDecl functDecl statement END
+    (3) labelDecl -> . LABEL NUMBER SEMICOLON
+    (4) labelDecl -> . empty
+    (65) empty -> .
+
+    LABEL           shift and go to state 6
+    CONST           reduce using rule 65 (empty -> .)
+    VAR             reduce using rule 65 (empty -> .)
+    BEGIN           reduce using rule 65 (empty -> .)
+
+    labelDecl                      shift and go to state 5
+    empty                          shift and go to state 7
+    block                          shift and go to state 124
+
+state 117
+
+    (29) parameterList -> parameterList SEMICOLON parameter .
+
+    SEMICOLON       reduce using rule 29 (parameterList -> parameterList SEMICOLON parameter .)
+    RPAREN          reduce using rule 29 (parameterList -> parameterList SEMICOLON parameter .)
+
+
+state 118
+
+    (32) parameter -> ID COMMA parameter .
+
+    SEMICOLON       reduce using rule 32 (parameter -> ID COMMA parameter .)
+    RPAREN          reduce using rule 32 (parameter -> ID COMMA parameter .)
+
+
+state 119
+
+    (31) parameter -> ID COLON typeDefinition .
+
+    SEMICOLON       reduce using rule 31 (parameter -> ID COLON typeDefinition .)
+    RPAREN          reduce using rule 31 (parameter -> ID COLON typeDefinition .)
+
+
+state 120
+
+    (22) identList_2 -> identList COLON typeDefinition . SEMICOLON identList_2
+
+    SEMICOLON       shift and go to state 125
+
+
+state 121
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON . typeDefinition SEMICOLON block SEMICOLON
+    (12) typeDefinition -> . empty
+    (13) typeDefinition -> . INTEGER
+    (14) typeDefinition -> . REAL
+    (15) typeDefinition -> . STRING
+    (16) typeDefinition -> . BOOLEAN
+    (65) empty -> .
+
+    INTEGER         shift and go to state 43
+    REAL            shift and go to state 39
+    STRING          shift and go to state 40
+    BOOLEAN         shift and go to state 42
+    SEMICOLON       reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 44
+    typeDefinition                 shift and go to state 126
+
+state 122
+
+    (35) statement -> statement ID EQUALS expression SEMICOLON .
+
+    ID              reduce using rule 35 (statement -> statement ID EQUALS expression SEMICOLON .)
+    IF              reduce using rule 35 (statement -> statement ID EQUALS expression SEMICOLON .)
+    END             reduce using rule 35 (statement -> statement ID EQUALS expression SEMICOLON .)
+    SEMICOLON       reduce using rule 35 (statement -> statement ID EQUALS expression SEMICOLON .)
+    ELSE            reduce using rule 35 (statement -> statement ID EQUALS expression SEMICOLON .)
+
+
+state 123
+
+    (37) statement -> statement IF condition THEN statement .
+    (38) statement -> statement IF condition THEN statement . ELSE statement
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+  ! shift/reduce conflict for ELSE resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    END             reduce using rule 37 (statement -> statement IF condition THEN statement .)
+    SEMICOLON       reduce using rule 37 (statement -> statement IF condition THEN statement .)
+    ELSE            shift and go to state 127
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+  ! ID              [ reduce using rule 37 (statement -> statement IF condition THEN statement .) ]
+  ! IF              [ reduce using rule 37 (statement -> statement IF condition THEN statement .) ]
+  ! ELSE            [ reduce using rule 37 (statement -> statement IF condition THEN statement .) ]
+
+
+state 124
+
+    (23) procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block . SEMICOLON
+
+    SEMICOLON       shift and go to state 128
+
+
+state 125
+
+    (22) identList_2 -> identList COLON typeDefinition SEMICOLON . identList_2
+    (21) identList_2 -> . empty
+    (22) identList_2 -> . identList COLON typeDefinition SEMICOLON identList_2
+    (65) empty -> .
+    (19) identList -> . ID
+    (20) identList -> . identList COMMA ID
+
+    BEGIN           reduce using rule 65 (empty -> .)
+    ID              shift and go to state 24
+
+    identList_2                    shift and go to state 129
+    identList                      shift and go to state 78
+    empty                          shift and go to state 80
+
+state 126
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition . SEMICOLON block SEMICOLON
+
+    SEMICOLON       shift and go to state 130
+
+
+state 127
+
+    (38) statement -> statement IF condition THEN statement ELSE . statement
+    (34) statement -> . empty
+    (35) statement -> . statement ID EQUALS expression SEMICOLON
+    (36) statement -> . BEGIN statementList END
+    (37) statement -> . statement IF condition THEN statement
+    (38) statement -> . statement IF condition THEN statement ELSE statement
+    (39) statement -> . WHILE condition DO statement
+    (65) empty -> .
+
+    BEGIN           shift and go to state 47
+    WHILE           shift and go to state 48
+    ID              reduce using rule 65 (empty -> .)
+    IF              reduce using rule 65 (empty -> .)
+    END             reduce using rule 65 (empty -> .)
+    SEMICOLON       reduce using rule 65 (empty -> .)
+    ELSE            reduce using rule 65 (empty -> .)
+
+    empty                          shift and go to state 50
+    statement                      shift and go to state 131
+
+state 128
+
+    (23) procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .
+
+    FUNCTION        reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+    BEGIN           reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+    WHILE           reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+    END             reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+    ID              reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+    IF              reduce using rule 23 (procDecl -> PROCEDURE ID LPAREN parameters RPAREN SEMICOLON block SEMICOLON .)
+
+
+state 129
+
+    (22) identList_2 -> identList COLON typeDefinition SEMICOLON identList_2 .
+
+    BEGIN           reduce using rule 22 (identList_2 -> identList COLON typeDefinition SEMICOLON identList_2 .)
+
+
+state 130
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON . block SEMICOLON
+    (2) block -> . labelDecl constDecl varDecl BEGIN procDecl functDecl statement END
+    (3) labelDecl -> . LABEL NUMBER SEMICOLON
+    (4) labelDecl -> . empty
+    (65) empty -> .
+
+    LABEL           shift and go to state 6
+    CONST           reduce using rule 65 (empty -> .)
+    VAR             reduce using rule 65 (empty -> .)
+    BEGIN           reduce using rule 65 (empty -> .)
+
+    labelDecl                      shift and go to state 5
+    empty                          shift and go to state 7
+    block                          shift and go to state 132
+
+state 131
+
+    (38) statement -> statement IF condition THEN statement ELSE statement .
+    (35) statement -> statement . ID EQUALS expression SEMICOLON
+    (37) statement -> statement . IF condition THEN statement
+    (38) statement -> statement . IF condition THEN statement ELSE statement
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+    END             reduce using rule 38 (statement -> statement IF condition THEN statement ELSE statement .)
+    SEMICOLON       reduce using rule 38 (statement -> statement IF condition THEN statement ELSE statement .)
+    ELSE            reduce using rule 38 (statement -> statement IF condition THEN statement ELSE statement .)
+    ID              shift and go to state 70
+    IF              shift and go to state 71
+
+  ! ID              [ reduce using rule 38 (statement -> statement IF condition THEN statement ELSE statement .) ]
+  ! IF              [ reduce using rule 38 (statement -> statement IF condition THEN statement ELSE statement .) ]
+
+
+state 132
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block . SEMICOLON
+
+    SEMICOLON       shift and go to state 133
+
+
+state 133
+
+    (26) functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .
+
+    BEGIN           reduce using rule 26 (functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .)
+    WHILE           reduce using rule 26 (functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .)
+    END             reduce using rule 26 (functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .)
+    ID              reduce using rule 26 (functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .)
+    IF              reduce using rule 26 (functDecl -> FUNCTION ID LPAREN parameters RPAREN COLON typeDefinition SEMICOLON block SEMICOLON .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 113 resolved as shift
+WARNING: shift/reduce conflict for IF in state 113 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 123 resolved as shift
+WARNING: shift/reduce conflict for ID in state 123 resolved as shift
+WARNING: shift/reduce conflict for IF in state 123 resolved as shift
+WARNING: shift/reduce conflict for ID in state 131 resolved as shift
+WARNING: shift/reduce conflict for IF in state 131 resolved as shift

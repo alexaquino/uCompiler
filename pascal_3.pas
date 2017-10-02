@@ -1,0 +1,13 @@
+
+{ CONST }
+{ 'labelDecl : LABEL NUMBER SEMICOLON' }
+
+PROGRAM Soma_Pares;
+LABEL 123456;
+
+CONST
+PI = 3.1415926;
+
+BEGIN
+{ BLOCK empty }
+END.
