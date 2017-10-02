@@ -1,4 +1,4 @@
-# uCompiler
+# uCompiler v0.1
 
 Compilador Pascal (básico) desenvolvido como projeto da disciplina de Compiladores da UERN:
 
